@@ -20,5 +20,33 @@ namespace PRN212_Assignment
         {
             InitializeComponent();
         }
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new ProductControl();
+        }
+
+        private void Customer_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new CustomerControl();
+        }
+
+        private void Invoice_Click(object sender, RoutedEventArgs e)
+        {
+            MainContent.Content = new InvoiceControl();
+        }
+
+        public void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            login loginWindow = new login();
+            loginWindow.Show();
+            this.Close();
+        }
+
+        public void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
     }
 }

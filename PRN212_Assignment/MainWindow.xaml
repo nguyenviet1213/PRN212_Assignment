@@ -7,6 +7,41 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!-- 2 Hàng: Menu | Nội dung -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Menu -->
+            <RowDefinition Height="*"/>
+            <!-- Nội dung -->
+        </Grid.RowDefinitions>
 
+        <!-- === MENU NGANG TRÊN CÙNG === -->
+        <Menu Grid.Row="0" Background="LightGray">
+            <MenuItem Header="_Hệ thống">
+                <MenuItem Header="Đăng xuất" Click="Logout_Click"/>
+                <MenuItem Header="Thoát" Click="Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Trợ giúp">
+                <MenuItem Header="Giới thiệu"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- === PHẦN DƯỚI: Sidebar + Content === -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <StackPanel Background="#2D2D30" Grid.Column="0">
+                <Button Content="Sản phẩm"  Margin="5" Click="Product_Click"/>
+                <Button Content="Khách hàng" Margin="5" Click="Customer_Click"/>
+                <Button Content="Hóa đơn"  Margin="5" Click="Invoice_Click"/>
+            </StackPanel>
+
+            <!-- Nội dung chính -->
+            <ContentControl x:Name="MainContent" Grid.Column="1" Grid.ColumnSpan="1"/>
+        </Grid>
     </Grid>
 </Window>
