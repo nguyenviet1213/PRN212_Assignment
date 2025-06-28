@@ -10,20 +10,27 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Header -->
         <TextBlock Text="Quản lý Sản phẩm" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+        <TextBox x:Name="txtSearch" Margin="376,0,10,10" TextChanged="txtSearch_TextChanged"  />
 
         <!-- DataGrid -->
         <DataGrid x:Name="productGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ProductID}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ProductId}"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
                 <DataGridTextColumn Header="Stock" Binding="{Binding Stock}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Add" Margin="0,0,10,0" Width="50" Click="Add_Click"/>
+            <Button Content="Edit" Margin="0,0,10,0" Width="50" Click="Edit_Click"/>
+            <Button Content="Delete" Width="50" Click="Delete_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>

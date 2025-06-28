@@ -12,17 +12,61 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using PRN212_Assignment.Models;
 
 namespace PRN212_Assignment
 {
-    /// <summary>
-    /// Interaction logic for InvoiceControl.xaml
-    /// </summary>
     public partial class InvoiceControl : UserControl
     {
+        SalesManagementSystemContext context = new SalesManagementSystemContext();
+
         public InvoiceControl()
         {
             InitializeComponent();
+            loadData();
+        }
+
+        public void loadData()
+        {
+            String keyword = txtSearch.Text;
+            if (keyword.IsNullOrEmpty())
+            {
+                var invoiceList = context.Invoices.Include(i => i.Employee).Include(i => i.Customer).ToList();
+                invoiceGrid.ItemsSource = invoiceList;
+            }
+            else
+            {
+                var invoiceList = context.Invoices
+                        .Include(i => i.Customer)
+                        .Include(i => i.Employee)
+                        .Where(i => i.Customer != null && i.Customer.Name.ToLower().Contains(keyword)
+                                 || i.Employee.Name.ToLower().Contains(keyword)
+                                 || i.TotalAmount.ToString().Contains(keyword)
+                                 || i.Date.ToString().Contains(keyword))
+                        .ToList();
+                invoiceGrid.ItemsSource = invoiceList;
+            }
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            loadData();
         }
     }
 }

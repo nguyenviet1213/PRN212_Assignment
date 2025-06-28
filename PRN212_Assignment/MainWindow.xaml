@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PRN212_Assignment"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Sales Management System" Height="450" Width="800">
     <Grid>
         <!-- 2 Hàng: Menu | Nội dung -->
         <Grid.RowDefinitions>
