@@ -35,6 +35,11 @@ namespace PRN212_Assignment
         {
             MainContent.Content = new InvoiceControl();
         }
+        private void MakeInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            CreateInvoiceWindow createInvoiceWindow = new CreateInvoiceWindow();
+            createInvoiceWindow.Show();
+        }
 
         public void Logout_Click(object sender, RoutedEventArgs e)
         {

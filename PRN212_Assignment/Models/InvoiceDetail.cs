@@ -15,6 +15,8 @@ public partial class InvoiceDetail
 
     public decimal Price { get; set; }
 
+    public decimal SubTotal => Quantity * Price;
+
     public virtual Invoice Invoice { get; set; } = null!;
 
     public virtual Product Product { get; set; } = null!;

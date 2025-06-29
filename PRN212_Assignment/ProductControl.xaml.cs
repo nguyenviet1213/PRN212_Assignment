@@ -48,16 +48,51 @@ namespace PRN212_Assignment
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
+            ProductFormWindow productForm = new ProductFormWindow();
+            bool? result = productForm.ShowDialog();
+            if (result == true)
+            {
+                loadData();
+            }
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (productGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a product to edit.");
+                return;
+            }
+            Product selectedProduct = (Product)productGrid.SelectedItem;
+            ProductFormWindow productForm = new ProductFormWindow(selectedProduct);
+            bool? result = productForm.ShowDialog();
+            if (result == true)
+            {
+                loadData();
+            }
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (productGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a product to delete.");
+                return;
+            }
+            Product selectedProduct = (Product)productGrid.SelectedItem;
+            MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the product: {selectedProduct.Name}?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    context.Products.Remove(selectedProduct);
+                    context.SaveChanges();
+                    loadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting product: {ex.Message}");
+                }
+            }
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)

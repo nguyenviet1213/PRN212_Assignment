@@ -64,6 +64,23 @@ namespace PRN212_Assignment
 
         }
 
+        private void ViewDetail_Click(object sender, RoutedEventArgs e)
+        {   
+            try
+            {
+                Button? btn = sender as Button;
+                var invoiceId = (int)btn.Tag;
+                Invoice? i = context.Invoices.Include(i => i.Employee)
+                                             .Include(c => c.Customer)
+                                             .FirstOrDefault(inv => inv.InvoiceId == invoiceId);
+                InvoiceDetailWindow detailWindow = new InvoiceDetailWindow(i);
+                detailWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred while opening the invoice details: " + ex.Message);
+            }
+        }
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             loadData();

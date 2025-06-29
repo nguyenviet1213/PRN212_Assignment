@@ -1,0 +1,56 @@
+﻿<Window x:Class="PRN212_Assignment.InvoiceDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRN212_Assignment"
+        mc:Ignorable="d"
+        Title="InvoiceDetailWindow" Height="450" Width="800">
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="spInvoiceInfo" Orientation="Vertical" Margin="0,0,0,10">
+
+            <TextBlock FontSize="16" FontWeight="Bold" TextWrapping="Wrap">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Chi tiết hóa đơn #{0} ({1:dd/MM/yyyy} - {2})">
+                        <Binding Path="InvoiceId" />
+                        <Binding Path="Date" />
+                        <Binding Path="Customer.Name" TargetNullValue="(Không rõ khách hàng)" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+
+            <TextBlock Text="{Binding Employee.Name, StringFormat='Nhân viên tạo: {0}'}"
+               FontSize="14" FontStyle="Italic" Foreground="Gray" />
+        </StackPanel>
+
+        <!-- Danh sách sản phẩm -->
+        <DataGrid x:Name="dgDetails" Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  RowHeight="30"
+                  ColumnHeaderHeight="35"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Sản phẩm" Binding="{Binding Product.Name}" Width="*" />
+                <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity}" Width="100" />
+                <DataGridTextColumn Header="Đơn giá" Binding="{Binding Product.Price, StringFormat=N2}" Width="120" />
+                <DataGridTextColumn Header="Thành tiền" Binding="{Binding Price, StringFormat=N2}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Tổng cộng -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <TextBlock Text="Tổng cộng: " FontWeight="Bold" FontSize="14"/>
+            <TextBlock x:Name="txtTotalAmount" FontSize="14" FontWeight="Bold" Margin="5,0,20,0"/>
+            <Button Content="Đóng" Width="80" Click="Close_Click"/>
+        </StackPanel>
+        </Grid>
+</Window>

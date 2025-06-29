@@ -13,8 +13,19 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Quản lý Hóa đơn" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-        <TextBox x:Name="txtSearch" Margin="376,0,10,10" TextChanged="txtSearch_TextChanged" />
+        <Grid Margin="0,0,0,10" VerticalAlignment="Center" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Quản lý Hóa Đơn" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="0" />
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+                <Label Content="Search:" VerticalAlignment="Center" />
+                <TextBox x:Name="txtSearch" Width="200" Margin="5,0,0,0" TextChanged="txtSearch_TextChanged" />
+            </StackPanel>
+        </Grid>
 
         <DataGrid x:Name="invoiceGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
@@ -22,7 +33,14 @@
                 <DataGridTextColumn Header="Customer Name" Binding="{Binding Customer.Name}"/>
                 <DataGridTextColumn Header="Employee Name" Binding="{Binding Employee.Name}"/>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
-                <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}"/>
+                <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount, StringFormat=N2}"/>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Chi tiết" Click="ViewDetail_Click" Tag="{Binding InvoiceId}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

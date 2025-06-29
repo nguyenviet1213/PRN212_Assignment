@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PRN212_Assignment"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10">
+    <Grid Margin="10" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -14,8 +14,21 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <TextBlock Text="Quản lý Sản phẩm" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
-        <TextBox x:Name="txtSearch" Margin="376,0,10,10" TextChanged="txtSearch_TextChanged"  />
+        <Grid Margin="0,0,0,10" VerticalAlignment="Center" Grid.Row="0"> 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <!-- cột trái chiếm hết khoảng trống -->
+                <ColumnDefinition Width="Auto" />
+                <!-- cột phải vừa đủ rộng nội dung -->
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Quản lý Sản Phẩm" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Grid.Column="0" />
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center">
+                <Label Content="Search:" VerticalAlignment="Center" />
+                <TextBox x:Name="txtSearch" Width="200" Margin="5,0,0,0" TextChanged="txtSearch_TextChanged" />
+            </StackPanel>
+        </Grid>
 
         <!-- DataGrid -->
         <DataGrid x:Name="productGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">

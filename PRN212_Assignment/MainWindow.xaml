@@ -38,6 +38,7 @@
                 <Button Content="Sản phẩm"  Margin="5" Click="Product_Click"/>
                 <Button Content="Khách hàng" Margin="5" Click="Customer_Click"/>
                 <Button Content="Hóa đơn"  Margin="5" Click="Invoice_Click"/>
+                <Button Content="Tạo hóa đơn"  Margin="5" Click="MakeInvoice_Click"/>
             </StackPanel>
 
             <!-- Nội dung chính -->

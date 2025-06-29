@@ -49,16 +49,47 @@ namespace PRN212_Assignment
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
+            CustomerFormWindow customerForm = new CustomerFormWindow();
+            if (customerForm.ShowDialog() == true)
+            {
+                loadData();
+            }
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (customerGrid.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a customer to edit.");
+                return;
+            }
+            CustomerFormWindow customerForm = new CustomerFormWindow((Customer)customerGrid.SelectedItem);
+            if (customerForm.ShowDialog() == true)
+            {
+                loadData();
+            }
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            Customer customer = (Customer)customerGrid.SelectedItem;
+            if (customer == null)
+            {
+                MessageBox.Show("Please select a customer to delete.");
+                return;
+            }
+            if (MessageBox.Show($"Are you sure you want to delete customer {customer.Name}?", "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    context.Customers.Remove(customer);
+                    context.SaveChanges();
+                    loadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting customer: {ex.Message}");
+                }
+            }
         }
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
